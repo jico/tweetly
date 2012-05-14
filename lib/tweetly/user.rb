@@ -17,16 +17,18 @@ module Tweetly
 		# Builds a word frequency array from recent tweets.
 		#
 		# @param [Hash] options frequency distribution options
-		# @option [Integer] tweets number of tweets to consider (max 3200)
-		# @option [Boolean] words_only ignore symbols and digits
-		# @option [Boolean] case_sensitive whether to consider word case
+		# @option [Integer] :tweets number of tweets to consider (max 3200)
+		# @option [Boolean] :words_only ignore symbols and digits
+		# @option [Boolean] :case_sensitive whether to consider word case
+		# @option [Array<String>] :ignore list of words to ignore
 		# @return [Array<Array<String, Integer>>] list of word frequencies in descending order
 		def word_freq(options={})
 			# Default parameters
 			params = {
 				tweets: 1000,
 				words_only: false,
-				case_sensitive: true
+				case_sensitive: true,
+				ignore: []
 			}
 			params.merge!(options)
 
@@ -37,6 +39,9 @@ module Tweetly
 
 			@timeline.each do |tweet|
 				tweet.text.split.each do |word|
+					# :ignore option
+					next if params[:ignore].include? word
+
 					# :case_sensitive option
 					word.downcase! if !params[:case_sensitive]
 
