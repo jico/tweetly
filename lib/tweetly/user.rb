@@ -22,7 +22,8 @@ module Tweetly
 		def word_freq(options={})
 			# Default parameters
 			params = {
-				tweets: 1000
+				tweets: 1000,
+				words_only: false
 			}
 			params.merge!(options)
 
@@ -33,6 +34,13 @@ module Tweetly
 
 			@timeline.each do |tweet|
 				tweet.text.split.each do |word|
+					# :words_only option
+					if params[:words_only]
+						word = word.match(/\w+/)
+						next unless word
+						word = word[0]
+					end
+
 					if freqDist.has_key? word
 						freqDist[word] += 1
 					else
