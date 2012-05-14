@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = Tweetly::VERSION
 
   gem.add_development_dependency "rake"
+  gem.add_development_dependency "rspec", "~> 2.9.0"
 
   gem.add_dependency "twitter"
 end
