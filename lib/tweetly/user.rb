@@ -20,6 +20,7 @@ module Tweetly
 		# @option [Integer] :tweets number of tweets to consider (max 3200)
 		# @option [Boolean] :words_only ignore symbols and digits
 		# @option [Boolean] :case_sensitive whether to consider word case
+		# @option [Boolean] :include_rts whether to consider retweeted statuses
 		# @option [Array<String>] :ignore list of words to ignore
 		# @return [Array<Array<String, Integer>>] list of word frequencies in descending order
 		def word_freq(options={})
@@ -28,6 +29,7 @@ module Tweetly
 				tweets: 1000,
 				words_only: false,
 				case_sensitive: true,
+				include_rts: true,
 				ignore: []
 			}
 			params.merge!(options)
@@ -38,6 +40,9 @@ module Tweetly
 			freqDist = {}
 
 			@timeline.each do |tweet|
+				# :include_rts option
+				next if !params[:include_rts] && tweet.retweeted_status
+
 				tweet.text.split.each do |word|
 					# :ignore option
 					next if params[:ignore].include? word
