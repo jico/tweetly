@@ -14,4 +14,8 @@ Gem::Specification.new do |gem|
   gem.name          = "tweetly"
   gem.require_paths = ["lib"]
   gem.version       = Tweetly::VERSION
+
+  gem.add_development_dependency "rake"
+
+  gem.add_dependency "twitter"
 end
