@@ -14,8 +14,11 @@ module Tweetly
 			end
 		end
 
-		# Build a word frequency array
+		# Builds a word frequency array from recent tweets.
 		#
+		# @param [Hash] options frequency distribution options
+		# @param [Integer] tweets number of tweets to consider (max 3200)
+		# @return [Array<Array<String, Integer>>] list of word frequencies in descending order
 		def word_freq(options={})
 			# Default parameters
 			params = {
@@ -40,8 +43,12 @@ module Tweetly
 			freqDist.sort_by { |k,v| -v }
 		end
 
-		# Print word frequency distribution
+		# Prints word frequency distribution list.
 		#
+		# @param [Hash] options printing options
+		# @option [Integer] tweets number of tweets to consider (max 3200)
+		# @option [Integer] count prints top count of frequency distribution list.
+		# 	Defaults to all words in list.
 		def print_word_freq(options={})
 			opts = {
 				tweets: 1000
