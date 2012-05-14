@@ -18,7 +18,7 @@ module Tweetly
 		#
 		# @param [Hash] options frequency distribution options
 		# @option [Integer] :tweets number of tweets to consider (max 3200)
-		# @option [Boolean] :words_only ignore symbols and digits
+		# @option [Boolean] :words_only ignore symbols
 		# @option [Boolean] :case_sensitive whether to consider word case
 		# @option [Boolean] :include_rts whether to consider retweeted statuses
 		# @option [Array<String>] :ignore list of words to ignore
@@ -70,17 +70,23 @@ module Tweetly
 		# Prints word frequency distribution list.
 		#
 		# @param [Hash] options printing options
-		# @option [Integer] tweets number of tweets to consider (max 3200)
-		# @option [Integer] count prints top count of frequency distribution list.
-		# 	Defaults to all words in list.
+		# @option [Integer] :tweets number of tweets to consider (default: 100, max: 3200)
+		# @option [Integer] :count prints top count of frequency distribution list
+		# @option [Boolean] :print_count whether to print count next to each word
 		def print_word_freq(options={})
 			opts = {
-				tweets: 1000
+				tweets: 1000,
+				print_count: true
 			}
 			opts.merge!(options)
 			dist = word_freq(opts)
 			opts[:count] ||= dist.count
-			dist[0,opts[:count]].each { |k,v| puts "#{k} (#{v})" }
+			dist[0,opts[:count]].each do |k,v| 
+				line = "#{k}"
+				line += " (#{v})" if opts[:print_count]
+				puts line
+			end
+			return
 		end
 
 		# Fetches user timeline and caches it in the @timeline field.
