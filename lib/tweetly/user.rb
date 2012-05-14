@@ -18,7 +18,8 @@ module Tweetly
 		#
 		# @param [Hash] options frequency distribution options
 		# @option [Integer] :tweets number of tweets to consider (max 3200)
-		# @option [Boolean] :words_only ignore symbols
+		# @option [Boolean] :words_only consider only word characers 
+		# 	i.e. (letters, symbols, underscores)
 		# @option [Boolean] :case_sensitive whether to consider word case
 		# @option [Boolean] :include_rts whether to consider retweeted statuses
 		# @option [Array<String>] :ignore list of words to ignore
