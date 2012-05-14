@@ -27,8 +27,22 @@ describe Tweetly::User do
 		end
 
 		it "should be able to fetch more than 1000" do
-			@user.fetch_timeline(1100)
-			@user.timeline.count.should == 1100
+			@user.fetch_timeline(1001)
+			@user.timeline.count.should == 1001
+		end
+
+		it "should not fetch duplicate tweets" do
+			seen = {}
+			duplicate = false
+			@user.timeline.each do |t|
+				if seen.has_key? t.id
+					duplicate = true
+					break
+				else
+					seen[t.id] = 1
+				end
+			end 
+			duplicate.should be_false
 		end
 	end
 

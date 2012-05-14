@@ -70,7 +70,10 @@ module Tweetly
 			count = [count, 3200].min
 
 			if @timeline.count < count
-				opts = { trim_user: true }
+				opts = { 
+					trim_user: 1,
+					include_rts: 1
+				}
 
 				while @timeline.length < count
 					# Fetch only what we don't have
@@ -80,7 +83,14 @@ module Tweetly
 					# We may need less depending on what's already fetched
 					opts[:count] = [200, count - @timeline.count].min
 
+					# Fetch an extra since max_id is included
+					opts[:count] += 1 if opts[:max_id]
+
 					resp = Twitter.user_timeline(@screen_name, opts)
+
+					# Avoid reinserting max_id tweet
+					resp.delete_at(0) if opts[:max_id]
+
 					resp.each { |tweet| @timeline << tweet }
 				end
 
