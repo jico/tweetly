@@ -5,14 +5,11 @@ module Tweetly
 
 		def initialize(name)
 			user = Twitter.user(name)
-			if user.protected?
-				return false
-			else
+			unless user.protected?
 				@name = user.name
 				@screen_name = user.screen_name
 				@protected = user.protected?
 				@statuses_count = user.statuses_count
-				return true
 			end
 		end
 
