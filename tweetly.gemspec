@@ -4,9 +4,9 @@ require File.expand_path('../lib/tweetly/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Jico Baligod"]
   gem.email         = ["jico@baligod.com"]
-  gem.description   = %q{Twitter analytics tools.}
-  gem.summary       = %q{Twitter user analytics and metrics.}
-  gem.homepage      = ""
+  gem.description   = %q{Twitter user timeline stats.}
+  gem.summary       = %q{Generate word frequency distributions from your Twitter statuses.}
+  gem.homepage      = "https://github.com/jico/tweetly"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
