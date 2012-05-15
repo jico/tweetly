@@ -5,12 +5,14 @@ module Tweetly
 
 		def initialize(name)
 			user = Twitter.user(name)
-			unless user.protected?
+			if !user.protected?
 				@name = user.name
 				@screen_name = user.screen_name
 				@protected = user.protected?
 				@statuses_count = user.statuses_count
 				@timeline = []
+			else
+				raise Tweetly::Error::Unauthorized, "User is protected", caller
 			end
 		end
 
