@@ -11,6 +11,14 @@ describe Tweetly::User do
     end
 	end
 
+	context "Initializing a protected user" do
+		it "should raise an error" do
+			lambda { 
+				@user = Tweetly::User.new('lbpere') 
+			}.should raise_error(Tweetly::Error::Unauthorized)
+		end
+	end
+
 	context "Fetching a user timeline" do
 		before do
 			@user = Tweetly::User.new('jicooo')
