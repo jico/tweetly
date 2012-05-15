@@ -64,14 +64,15 @@ which prints:
 Well, that's not a very interesting list. Let's ignore retweets as well as a few common words. Additionally, let's constrain our list to words of at least length 5, only word characters (i.e. letters, digits, underscores), and case insensitive:
 
 ```ruby
-		options = {
-			include_rts: false, 
-			ignore: ['the', 'to', 'a', 'I'], 
-			min_length: 5, 
-			words_only: true, 
-			case_sensitive: false
-		}
-		user.print_word_freq(options)
+options = {
+	include_rts: false, 
+	ignore: ['the', 'to', 'a', 'I'], 
+	min_length: 5, 
+	words_only: true, 
+	case_sensitive: false
+}
+
+user.print_word_freq(options)
 ```
 
 The above prints out:
