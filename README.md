@@ -2,7 +2,9 @@
 
 Generate nifty word frequency distributions from your Twitter statuses.
 
-Written and tested in __Ruby 1.9.3__.
+Written and tested in __Ruby 1.9.3__
+
+Gem hosted on [RubyGems](https://rubygems.org/gems/tweetly), where you can find more documentation.
 
 ## Installation
 
