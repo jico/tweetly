@@ -41,7 +41,7 @@ module Tweetly
 
 			freqDist = {}
 
-			@timeline.each do |tweet|
+			@timeline.each_with_index do |tweet, i|
 				# :include_rts option
 				next if !params[:include_rts] && tweet.retweeted_status
 
@@ -68,6 +68,8 @@ module Tweetly
 						freqDist[word] = 1
 					end
 				end
+
+				break if i == params[:tweets]
 			end
 			freqDist.sort_by { |k,v| -v }
 		end
