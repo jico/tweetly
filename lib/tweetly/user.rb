@@ -31,6 +31,7 @@ module Tweetly
 				words_only: false,
 				case_sensitive: true,
 				include_rts: true,
+				min_length: nil,
 				ignore: []
 			}
 			params.merge!(options)
@@ -57,6 +58,9 @@ module Tweetly
 						next unless word
 						word = word[0]
 					end
+
+					# :min_length option
+					next if params[:min_length] && word.length < params[:min_length]
 
 					if freqDist.has_key? word
 						freqDist[word] += 1
