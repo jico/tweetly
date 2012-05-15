@@ -40,26 +40,19 @@ module Tweetly
 			fetch_timeline(params[:tweets]) if @timeline.count < params[:tweets]
 
 			freqDist = {}
-
 			@timeline.each_with_index do |tweet, i|
 				# :include_rts option
 				next if !params[:include_rts] && tweet.retweeted_status
 
 				tweet.text.split.each do |word|
-					# :ignore option
+					# Adjust according to options
 					next if params[:ignore].include? word
-
-					# :case_sensitive option
 					word.downcase! if !params[:case_sensitive]
-
-					# :words_only option
 					if params[:words_only]
 						word = word.match(/\w+/)
 						next unless word
 						word = word[0]
 					end
-
-					# :min_length option
 					next if params[:min_length] && word.length < params[:min_length]
 
 					if freqDist.has_key? word
