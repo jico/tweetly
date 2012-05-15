@@ -82,7 +82,6 @@ The above prints out:
 		right (21)
 		think (20)
 		pretty (20)
-		=> nil
 
 Awesome! That's a great looking list.
 
@@ -96,7 +95,6 @@ If you strictly want the words and not the frequency counts printed, you can pas
 		right
 		think
 		pretty
-		=> nil
 
 ## Contributing
 
