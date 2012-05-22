@@ -38,6 +38,9 @@ module Tweetly
 			}
 			params.merge!(options)
 
+			# Check for users with < 1000 tweets
+			params[:tweets] = [params[:tweets], @statuses_count].min
+
 			# Fetch Tweets if necessary
 			fetch_timeline(params[:tweets]) if @timeline.count < params[:tweets]
 
